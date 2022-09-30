@@ -12,5 +12,3 @@
 1) First install required libraries via `pip install -r requirements.txt`
 2) Go to `source` folder via `cd source`
 3) Execute `xmlToCsv.py` using python3 xmlToCsv.py`
-4) First go to the `src` folder via `cd src`.
-5) Execute the `parse` python script using `python3 parse.py`
