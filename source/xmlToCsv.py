@@ -6,6 +6,19 @@ from urllib.request import urlopen
 from zipfile import ZipFile
 from io import StringIO 
 import boto3
+import logging 
+
+#now we will Create and configure logger 
+logging.basicConfig(filename="std.log", 
+					format='%(asctime)s %(message)s', 
+					filemode='w') 
+
+#Let us Create an object 
+logger=logging.getLogger() 
+
+#Now we are going to Set the threshold of logger to DEBUG 
+logger.setLevel(logger.debug) 
+
 
 class Parse:
     '''
@@ -56,7 +69,7 @@ class Parse:
 
         s3_res.Object(bucket_name, s3_object_name).put(Body=csv_buffer.getvalue())
 
-        print("Dataframe is saved as CSV in S3 bucket.")
+        logger.debug("Dataframe is saved as CSV in S3 bucket.")
 
 
 
@@ -77,16 +90,16 @@ class Parse:
         filepath = None
         flag=1
         for (dirpath, dirnames, filenames) in os.walk('..'):
-            # print(dirpath, dirnames, filenames)
+            # logger.debug(dirpath, dirnames, filenames)
             for f in filenames:
                 if ".xml" in f:
                     # Take first xml file
                     if flag:
-                        print(f)
+                        logger.debug(f)
                         filepath = os.path.join(self.path, f)
                         flag=0
         # Getting xml tree
-        print(filepath)
+        logger.debug(filepath)
 
         tree = Tree.parse(filepath)
         # Get the root of tree
@@ -128,17 +141,9 @@ class Parse:
         self.saveToS3(df)
         df.to_csv(os.path.join(self.path, 'ans.csv'), index=False)
 
-
-
-
-
-
-
-
-
 if __name__ == '__main__':
     path = os.pardir
-    print("path is ",path)
+    logger.debug("path is ",path)
     # Get the download url
     url = 'http://firds.esma.europa.eu/firds/DLTINS_20210117_01of01.zip'
     # Execute function
