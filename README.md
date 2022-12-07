@@ -4,8 +4,7 @@
 
 1) Downloading and Extracting XML (completely automated)
 2) Converting XML to CSV with required headers.
-3) Required CSV stored on S3 bucket (link above).
-4) Follows PEP8 guidelines and has pydoc with type hints.
+3) Follows PEP8 guidelines and has pydoc with type hints.
 
 ## Usage
 
